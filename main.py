@@ -2,11 +2,33 @@ import numpy as np
 import math
 
 
+def extract_rows(sudoku):
+    side = get_side(sudoku)
+    rows = []
+    for a in range(side):
+        row = sudoku[a * side:(a + 1) * side]
+        rows.append(row)
 
+    rows = np.array(rows)
+    return rows
+
+def extract_columns(sudoku):
+    side = get_side(sudoku)
+    columns = []
+    for a in range(side):
+        for b in range(side):
+            column = sudoku[a]
+
+def get_side(sudoku):
+    side = math.sqrt(len(sudoku))
+    if side % 1 != 0 and side * side != len(sudoku):
+        return "Not a valid sudoku"
+    side = int(side)
+    return side
 
 def get_input():
     #sudoku = input()
-    sudoku = np.array([
+    input_sudoku = np.array([
         5, 3, None, None, 7, None, None, None, None,
         6, None, None, 1, 9, 5, None, None, None,
         None, 9, 8, None, None, None, None, 6, None,
@@ -17,19 +39,14 @@ def get_input():
         None, None, None, 4, 1, 9, None, None, 5,
         None, None, None, None, 8, None, None, 7, 9
     ])
-    side = math.sqrt(len(sudoku))
-    if side % 1 != 0 and side * side != len(sudoku):
-        return "Not a valid sudoku"
+    #side = get_side(sudoku)
 
-    side = int(side)
 
-    rows = np.array(
-        [
-            sudoku[0:side]
-        ]
-    )
+    return input_sudoku
 
-    return "sudoku: " + str(sudoku) + "Rows: " + str(rows)
+task = get_input()
+sudoku_rows = extract_rows(task)
+
 
 
 print(get_input())
