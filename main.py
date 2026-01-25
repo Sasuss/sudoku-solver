@@ -1,47 +1,5 @@
 import numpy as np
-import math
-
-
-def extract_rows(sudoku):
-    """
-    :param sudoku: 1d list of sudoku
-    :return: list of inidividual rows from the sudoku
-    """
-    side = get_side(sudoku)
-    rows = []
-    for a in range(side):
-        row = sudoku[a * side:(a + 1) * side]
-        rows.append(row)
-
-    rows = np.array(rows)
-    return rows
-
-
-def extract_columns(sudoku):
-    """
-    :param sudoku: 1d list of sudoku
-    :return: list of inidividual columns from the sudoku
-    """
-    side = get_side(sudoku)
-    columns = []
-    column = []
-    for a in range(side):
-        for b in range(side):
-            column.append(sudoku[a + (b * 9)])
-
-        columns.append(column)
-        column = []
-
-    columns = np.array(columns)
-    return columns
-
-
-def get_side(sudoku):
-    side = math.sqrt(len(sudoku))
-    if side % 1 != 0 and side * side != len(sudoku):
-        return "Not a valid sudoku"
-    side = int(side)
-    return side
+from sudoku_base import extract_blocks, extract_columns, extract_rows
 
 
 def get_input():
@@ -64,6 +22,11 @@ def get_input():
 
 task = get_input()
 sudoku_rows = extract_rows(task)
-print(extract_columns(task))
+sudoku_columns = extract_columns(task)
+sudoku_blocks = extract_blocks(task)
+
+print(sudoku_rows)
+print(sudoku_columns)
+print(sudoku_blocks)
 
 #print(get_input())
