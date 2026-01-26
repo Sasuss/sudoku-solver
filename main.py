@@ -29,4 +29,6 @@ print(sudoku_rows)
 print(sudoku_columns)
 print(sudoku_blocks)
 
+print(type(sudoku_blocks[0]))
+
 #print(get_input())
